@@ -15,3 +15,9 @@ Route::view('/blank', 'blank');
 
 Route::get('/', 'HomeController@index')->name('dashboard');
 
+//Resources controllers
+Route::resource('product', 'ProductController')->middleware('auth');
+Route::resource('provider', 'ProviderController')->middleware('auth');
+Route::resource('reports', 'ReportsController')->middleware('auth');
+Route::resource('sale', 'SaleController')->middleware('auth');
+Route::resource('storage', 'StorageController')->middleware('auth');

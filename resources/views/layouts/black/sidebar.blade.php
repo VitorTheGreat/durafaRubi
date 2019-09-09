@@ -18,6 +18,42 @@
               <p>Dashboard</p>
             </a>
           </li>
+          <li>
+            <a href="/product">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Produtos</p>
+            </a>
+          </li>
+          <li>
+            <a href="/provider">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Fornecedores</p>
+            </a>
+          </li>
+          <li>
+            <a href="/storage">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Estoques</p>
+            </a>
+          </li>
+          <li>
+            <a href="/sale">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Vender</p>
+            </a>
+          </li>
+          <li>
+            <a href="/reports">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Relatórios</p>
+            </a>
+          </li>
+          <li>
+            <a href="/blank">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Blank Page</p>
+            </a>
+          </li>
           {{-- <li>
             <a href="./icons.html">
               <i class="tim-icons icon-atom"></i>
