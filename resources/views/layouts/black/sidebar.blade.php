@@ -21,13 +21,13 @@
           <li>
             <a href="/product">
               <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Produtos</p>
+              <p>Seção Produto</p>
             </a>
           </li>
           <li>
             <a href="/provider">
               <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Fornecedores</p>
+              <p>Seção Fornecedore</p>
             </a>
           </li>
           <li>
