@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reports;
+use App\Models\Venda;
 use Illuminate\Http\Request;
 
-class ReportsController extends Controller
+class VendaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        return view('reports.index');
+        return view('sale.index');
     }
 
     /**
@@ -41,10 +41,10 @@ class ReportsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Reports  $reports
+     * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function show(Reports $reports)
+    public function show(Venda $venda)
     {
         //
     }
@@ -52,10 +52,10 @@ class ReportsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Reports  $reports
+     * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reports $reports)
+    public function edit(Venda $venda)
     {
         //
     }
@@ -64,10 +64,10 @@ class ReportsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Reports  $reports
+     * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reports $reports)
+    public function update(Request $request, Venda $venda)
     {
         //
     }
@@ -75,10 +75,10 @@ class ReportsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Reports  $reports
+     * @param  \App\Models\Venda  $venda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reports $reports)
+    public function destroy(Venda $venda)
     {
         //
     }

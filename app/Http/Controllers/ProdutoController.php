@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Storage;
+use App\Models\Produto;
+use App\Models\Fornecedor;
+use App\Models\Cor;
+use App\Models\Estoque;
+use App\Models\Referencia;
+use App\Models\Tamanho;
+use App\Models\Tipo;
 use Illuminate\Http\Request;
 
-class StorageController extends Controller
+class ProdutoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +20,7 @@ class StorageController extends Controller
      */
     public function index()
     {
-        return view('storage.index');
+        return view('product.index');
     }
 
     /**
@@ -24,7 +30,14 @@ class StorageController extends Controller
      */
     public function create()
     {
-        //
+        $providers = Fornecedor::all();
+        $colors = Cor::all();
+        $references = Referencia::all();
+        $types = Tipo::all();
+        $sizes = Tamanho::all();
+        $storages = Estoque::all();
+
+        return view('product.create', compact('providers', 'colors', 'references', 'types', 'sizes', 'storages'));
     }
 
     /**
@@ -41,10 +54,10 @@ class StorageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Storage  $storage
+     * @param  \App\Models\Produto  $Produto
      * @return \Illuminate\Http\Response
      */
-    public function show(Storage $storage)
+    public function show(Produto $produto)
     {
         //
     }
@@ -52,10 +65,10 @@ class StorageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Storage  $storage
+     * @param  \App\Models\Produto  $Produto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Storage $storage)
+    public function edit(Produto $produto)
     {
         //
     }
@@ -64,10 +77,10 @@ class StorageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Storage  $storage
+     * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Storage $storage)
+    public function update(Request $request, Produto $produto)
     {
         //
     }
@@ -75,10 +88,10 @@ class StorageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Storage  $storage
+     * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Storage $storage)
+    public function destroy(Produto $produto)
     {
         //
     }

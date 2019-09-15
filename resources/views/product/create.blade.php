@@ -6,25 +6,6 @@
 
 <h1>Novo Produto</h1>
 <hr />
-{{-- <div class="row">
-    <div class="card">
-        <div class="card-body">
-          <form>
-            <div class="form-row">
-              <div class="col">
-                <input type="text" class="form-control" placeholder="First name">
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" placeholder="Last name">
-              </div>
-            </div>
-            <button class="btn btn-primary btn-round">
-               Registrar
-            </button>
-          </form>
-        </div>
-      </div>
-</div> --}}
 
 <div class="row">
     <!-- / COMEÇA CADASTRO PRODUTO -->
@@ -43,7 +24,9 @@
                 <label for="exampleInputName">Referência</label>
                 <input placeholder="Referencia" class="form-control" list="lista_referencia" name="referencia">
                 <datalist id="lista_referencia">
-                    <option value="" />
+                    @foreach ($references as $refer)
+                        <option value="{{$refer->referencia}}" />
+                    @endforeach
                 </datalist>
               </div>
 
@@ -57,7 +40,9 @@
                 <label for="exampleConfirmPassword">Cor</label>
                 <input placeholder="Cor" class="form-control" list="lista_cor" name="cor">
                 <datalist id="lista_cor">
-                    <option value="" />
+                    @foreach ($colors as $color)
+                    <option value="{{$color->nome}}" />
+                    @endforeach
                 </datalist>
               </div>
 
@@ -78,7 +63,9 @@
               <div class="col-md-5">
                 <label for="exampleInputEmail1">Tipo</label>
                   <select name="id_tipo" class="form-control">
-                  <option value=""></option>
+                      @foreach ($types as $type)
+                        <option value="{{$type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>
+                      @endforeach
                   </select>
               </div>
 
@@ -106,11 +93,13 @@
                     <div class="col-md-12">
                         <label for="exampleInputEmail1">Tamanho</label>
                         <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <input name="idtamanho[]" id="id_tamanho" value="" hidden>
-                            <span class="input-group-text" id="inputGroup-sizing-sm"></span>
-                        </div>
-                            <input type="number" name="quantidade[]" id="quantidade_tamanho" value="0" class="form-control" aria-label="Small" placeholder="QTD" aria-describedby="inputGroup-sizing-sm">
+                            @foreach ($sizes as $size)
+                                <div class="input-group-prepend mb-2 col-2">
+                                    <input name="idtamanho[]" id="id_tamanho" value="" hidden>
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">{{$size->tamanho}}</span>
+                                    <input type="number" name="quantidade[]" id="quantidade_tamanho" value="0" class="form-control form-control-sm" aria-label="Small" placeholder="QTD" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 
@@ -143,13 +132,17 @@
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Fornecedor</label>
                   <select name="id_fornecedor" class="form-control">
-                    <option value=""></option>
+                      @foreach ($providers as $provider)
+                      <option value="{{$provider->idfornecedor}}"> {{$provider->nome}} </option>
+                      @endforeach
                   </select>
               </div>
               <div class="col-md-6">
                 <label for="exampleConfirmPassword">Estoques Fisico</label>
                   <select name="id_estoques" class="form-control">
-                  <option value=""></option>
+                      @foreach ($storages as $storage)
+                        <option value="{{$storage->idestoques}}">{{$storage->nome_estoques}}</option>
+                      @endforeach
                   </select>
               </div>
             </div>
@@ -166,8 +159,8 @@
 
 <!-- MODALS -  CONTEM CAMPOS PARA INSERIR NOVOS DADOS NO BANCO SEM PRECISAR MUDAR DE PAGINA -->
 <!-- Modal tipo-->
-<div class="modal fade" id="tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal modal-black fade" id="tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">Criar Novo Tipo</h5>
@@ -184,9 +177,9 @@
                       <option value="Feminino">Feminino</option>
                       <option value="Unisex">Unisex</option>
                     </select>
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="submit" name="btn_cadastra_tipo"><i class="fa fa-plus"></i></button>
-                    </div>
+                    <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_tipo">
+                        <i class="tim-icons icon-simple-add"></i>
+                    </button>
                 </div>
                 </form>
             </div>
@@ -200,8 +193,8 @@
 
 
       <!-- Modal tamanho-->
-      <div class="modal fade" id="tamanho" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal modal-black fade" id="tamanho" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">Criar Novo tamanho</h5>
@@ -213,9 +206,9 @@
               <form method="post" action="modelo/cadastra_tamanho.php">
                   <div class="input-group mb-3">
                       <input type="text" name="tamanho" id="tamanho" class="form-control" placeholder="Novo Tamanho" required>
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit" name="btn_cadastra_tamanho"><i class="fa fa-plus"></i></button>
-                      </div>
+                      <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_tamanho">
+                            <i class="tim-icons icon-simple-add"></i>
+                        </button>
                   </div>
                 </form>
             </div>
@@ -228,8 +221,8 @@
       </div>
 
       <!-- Modal cor-->
-      <div class="modal fade" id="cor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal modal-black fade" id="cor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">Criar Nova cor</h5>
@@ -241,9 +234,9 @@
               <form method="post" action="modelo/cadastra_cor.php">
                   <div class="input-group mb-3">
                       <input type="text" name="nome_cor" id="nome_cor" class="form-control" placeholder="Nova Cor" required>
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit" name="btn_cadastra_cor"><i class="fa fa-plus"></i></button>
-                      </div>
+                      <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_cor">
+                            <i class="tim-icons icon-simple-add"></i>
+                        </button>
                   </div>
                 </form>
             </div>

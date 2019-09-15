@@ -11,4 +11,5 @@
     <link href="{{asset('black/css/nucleo-icons.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="{{asset('black/css/black-dashboard.css?v=1.0.0')}}" rel="stylesheet" />
+    <link href="{{asset('css/global.css')}}" rel="stylesheet" />
 

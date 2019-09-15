@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Estoque;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class EstoqueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        return view('storage.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Estoque $estoque)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Estoque $estoque)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Estoque $estoque)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Estoque $estoque)
     {
         //
     }
