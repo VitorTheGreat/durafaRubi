@@ -48,7 +48,22 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = request()->validate([
+            'referencia' => 'required|min:3',
+            'marca' => 'required|min:3',
+            'cor' => 'required|min:3',
+            'id_tipo' => 'required',
+            'descricao' => 'required|min:3',
+            'idtamanho' => 'required',
+            'quantidade' => 'required',
+            'preco_compra' => 'required',
+            'preco_venda' => 'required',
+            'id_fornecedor' => 'required',
+            'id_estoques' => 'required'
+        ]);
+
+        dd($data);
     }
 
     /**

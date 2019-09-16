@@ -6,6 +6,17 @@
 
 <h1>Novo Produto</h1>
 <hr />
+{{ $errors->first('referencia') }}
+{{ $errors->first('marca') }}
+{{ $errors->first('cor') }}
+{{ $errors->first('id_tipo') }}
+{{ $errors->first('descricao') }}
+{{ $errors->first('preco_compra') }}
+{{ $errors->first('preco_venda') }}
+{{ $errors->first('id_fornecedor') }}
+{{ $errors->first('id_estoques') }}
+{{ $errors->first('idtamanho') }}
+{{ $errors->first('quantidade') }}
 
 <div class="row">
     <!-- / COMEÇA CADASTRO PRODUTO -->
@@ -15,8 +26,8 @@
       {{-- <div class="card-header">Cadastro Produto</div> --}}
       <div class="card-body">
 
-        <form method="post" action="modelo/cadastra_produto.php">
-
+        <form method="POST" action="/product">
+        @csrf
           <div class="form-group">
             <div class="form-row">
 
@@ -32,7 +43,7 @@
 
               <div class="col-md-3">
                 <label for="exampleInputName">Marca</label>
-                  <input name="marca" type="text" placeholder="Marca" class="form-control input-md" required="">
+                  <input name="marca" type="text" placeholder="Marca" class="form-control input-md" >
               </div>
 
 
@@ -79,7 +90,7 @@
               <div class="col-md-5">
 
                 <label for="exampleInputPassword1">Descrição</label>
-                  <input name="descricao" type="text" placeholder="Descrição" class="form-control input-md" required="">
+                  <input name="descricao" type="text" placeholder="Descrição" class="form-control input-md" >
               </div>
 
 
@@ -95,7 +106,7 @@
                         <div class="input-group input-group-sm mb-3">
                             @foreach ($sizes as $size)
                                 <div class="input-group-prepend mb-2 col-2">
-                                    <input name="idtamanho[]" id="id_tamanho" value="" hidden>
+                                    <input name="idtamanho[]" id="id_tamanho" value="{{$size->idtamanho}}" hidden>
                                     <span class="input-group-text" id="inputGroup-sizing-sm">{{$size->tamanho}}</span>
                                     <input type="number" name="quantidade[]" id="quantidade_tamanho" value="0" class="form-control form-control-sm" aria-label="Small" placeholder="QTD" aria-describedby="inputGroup-sizing-sm">
                                 </div>
@@ -117,11 +128,11 @@
               <div class="form-row">
               <div class="col-md-3">
                 <label for="exampleInputPassword1">Preço de Compra</label>
-                  <input name="preco_compra" type="text" placeholder="R$" class="form-control input-md" required="">
+                  <input name="preco_compra" type="text" placeholder="R$" class="form-control input-md" >
               </div>
               <div class="col-md-3">
                 <label for="exampleInputPassword1">Preço de Venda</label>
-                  <input name="preco_venda" type="text" placeholder="R$" class="form-control input-md" required="">
+                  <input name="preco_venda" type="text" placeholder="R$" class="form-control input-md" >
               </div>
 
             </div>
@@ -205,7 +216,7 @@
             <div class="modal-body">
               <form method="post" action="modelo/cadastra_tamanho.php">
                   <div class="input-group mb-3">
-                      <input type="text" name="tamanho" id="tamanho" class="form-control" placeholder="Novo Tamanho" required>
+                      <input type="text" name="tamanho" id="tamanho" class="form-control" placeholder="Novo Tamanho" >
                       <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_tamanho">
                             <i class="tim-icons icon-simple-add"></i>
                         </button>
@@ -233,7 +244,7 @@
             <div class="modal-body">
               <form method="post" action="modelo/cadastra_cor.php">
                   <div class="input-group mb-3">
-                      <input type="text" name="nome_cor" id="nome_cor" class="form-control" placeholder="Nova Cor" required>
+                      <input type="text" name="nome_cor" id="nome_cor" class="form-control" placeholder="Nova Cor" >
                       <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_cor">
                             <i class="tim-icons icon-simple-add"></i>
                         </button>
