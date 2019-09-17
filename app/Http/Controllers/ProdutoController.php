@@ -36,8 +36,9 @@ class ProdutoController extends Controller
         $types = Tipo::all();
         $sizes = Tamanho::all();
         $storages = Estoque::all();
+        $product = new Produto();
 
-        return view('product.create', compact('providers', 'colors', 'references', 'types', 'sizes', 'storages'));
+        return view('product.create', compact('product', 'providers', 'colors', 'references', 'types', 'sizes', 'storages'));
     }
 
     /**
@@ -64,6 +65,8 @@ class ProdutoController extends Controller
         ]);
 
         dd($data);
+
+        // return redirect('product');
     }
 
     /**

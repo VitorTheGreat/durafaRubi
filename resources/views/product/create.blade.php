@@ -6,6 +6,7 @@
 
 <h1>Novo Produto</h1>
 <hr />
+
 {{ $errors->first('referencia') }}
 {{ $errors->first('marca') }}
 {{ $errors->first('cor') }}
@@ -33,7 +34,7 @@
 
               <div class="col-md-3">
                 <label for="exampleInputName">Referência</label>
-                <input placeholder="Referencia" class="form-control" list="lista_referencia" name="referencia">
+                <input value="{{ old('referencia') ?? $product->referencia}}" placeholder="Referencia" class="form-control" list="lista_referencia" name="referencia">
                 <datalist id="lista_referencia">
                     @foreach ($references as $refer)
                         <option value="{{$refer->referencia}}" />
@@ -43,13 +44,13 @@
 
               <div class="col-md-3">
                 <label for="exampleInputName">Marca</label>
-                  <input name="marca" type="text" placeholder="Marca" class="form-control input-md" >
+                  <input value="{{ old('marca') ?? $product->marca}}" name="marca" type="text" placeholder="Marca" class="form-control input-md" >
               </div>
 
 
               <div class="col-md-5">
                 <label for="exampleConfirmPassword">Cor</label>
-                <input placeholder="Cor" class="form-control" list="lista_cor" name="cor">
+                <input value="{{ old('cor') ?? $product->cor}}" placeholder="Cor" class="form-control" list="lista_cor" name="cor">
                 <datalist id="lista_cor">
                     @foreach ($colors as $color)
                     <option value="{{$color->nome}}" />
@@ -75,7 +76,8 @@
                 <label for="exampleInputEmail1">Tipo</label>
                   <select name="id_tipo" class="form-control">
                       @foreach ($types as $type)
-                        <option value="{{$type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>
+                        {{--  <option value="{{$type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>  --}}
+                        <option value="{{old('id_tipo') ?? $type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>
                       @endforeach
                   </select>
               </div>
