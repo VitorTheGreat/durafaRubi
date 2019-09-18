@@ -4,6 +4,16 @@
 
 @section('layouts.black.content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="tim-icons icon-simple-remove"></i>
+        </button>
+        <span>
+        <b> Success - </b> {{session('status')}}</span>
+    </div>
+@endif
+
 <h1>Novo Produto</h1>
 <hr />
 
@@ -76,8 +86,7 @@
                 <label for="exampleInputEmail1">Tipo</label>
                   <select name="id_tipo" class="form-control">
                       @foreach ($types as $type)
-                        {{--  <option value="{{$type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>  --}}
-                        <option value="{{old('id_tipo') ?? $type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>
+                        <option value="{{$type->idtipo}}">{{$type->tipo . ' '. $type->genero}}</option>
                       @endforeach
                   </select>
               </div>
@@ -92,7 +101,7 @@
               <div class="col-md-5">
 
                 <label for="exampleInputPassword1">Descrição</label>
-                  <input name="descricao" type="text" placeholder="Descrição" class="form-control input-md" >
+                  <input value="{{ old('descricao') ?? $product->descricao}}" name="descricao" type="text" placeholder="Descrição" class="form-control input-md" >
               </div>
 
 
@@ -130,11 +139,11 @@
               <div class="form-row">
               <div class="col-md-3">
                 <label for="exampleInputPassword1">Preço de Compra</label>
-                  <input name="preco_compra" type="text" placeholder="R$" class="form-control input-md" >
+                  <input name="preco_compra" type="text" value="{{old('preco_compra') ?? $product->preco_compra}}" placeholder="R$" class="form-control input-md" >
               </div>
               <div class="col-md-3">
                 <label for="exampleInputPassword1">Preço de Venda</label>
-                  <input name="preco_venda" type="text" placeholder="R$" class="form-control input-md" >
+                  <input name="preco_venda" type="text" value="{{old('preco_venda') ?? $product->preco_venda}}" placeholder="R$" class="form-control input-md" >
               </div>
 
             </div>
@@ -170,98 +179,8 @@
 
 </div>
 
-<!-- MODALS -  CONTEM CAMPOS PARA INSERIR NOVOS DADOS NO BANCO SEM PRECISAR MUDAR DE PAGINA -->
-<!-- Modal tipo-->
-<div class="modal modal-black fade" id="tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Criar Novo Tipo</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form method="post" action="modelo/cadastra_tipo.php">
-                <div class="input-group mb-3">
-                    <input type="text" name="tipo" id="tipo" class="form-control" placeholder="Modelo" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <select name="genero" id="genero" class="form-control">
-                      <option value="Masculino">Masculino</option>
-                      <option value="Feminino">Feminino</option>
-                      <option value="Unisex">Unisex</option>
-                    </select>
-                    <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_tipo">
-                        <i class="tim-icons icon-simple-add"></i>
-                    </button>
-                </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Modal tamanho-->
-      <div class="modal modal-black fade" id="tamanho" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Criar Novo tamanho</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form method="post" action="modelo/cadastra_tamanho.php">
-                  <div class="input-group mb-3">
-                      <input type="text" name="tamanho" id="tamanho" class="form-control" placeholder="Novo Tamanho" >
-                      <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_tamanho">
-                            <i class="tim-icons icon-simple-add"></i>
-                        </button>
-                  </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal cor-->
-      <div class="modal modal-black fade" id="cor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Criar Nova cor</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form method="post" action="modelo/cadastra_cor.php">
-                  <div class="input-group mb-3">
-                      <input type="text" name="nome_cor" id="nome_cor" class="form-control" placeholder="Nova Cor" >
-                      <button class="btn btn-primary btn-fab btn-icon"  name="btn_cadastra_cor">
-                            <i class="tim-icons icon-simple-add"></i>
-                        </button>
-                  </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- // TERMINA MOLDAS -->
-
+{{--  Modals to create new color, size, reference  --}}
+@include('product.modals.prod_modals')
 
 
 @endsection

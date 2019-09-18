@@ -15,9 +15,12 @@ Route::view('/blank', 'blank');
 
 Route::get('/', 'HomeController@index')->name('dashboard');
 
-//Resources controllers
+//Resources controllers/routes
 Route::resource('product', 'ProdutoController')->middleware('auth');
 Route::resource('provider', 'FornecedorController')->middleware('auth');
 Route::resource('reports', 'RelatoriosController')->middleware('auth');
 Route::resource('sale', 'VendaController')->middleware('auth');
 Route::resource('storage', 'EstoqueController')->middleware('auth');
+
+//Cor, Tamanho, Referencia store routes
+Route::post('size', 'TamanhoController@store');

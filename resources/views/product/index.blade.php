@@ -4,6 +4,16 @@
 
 @section('layouts.black.content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="tim-icons icon-simple-remove"></i>
+        </button>
+        <span>
+        <b> Success - </b> {{session('status')}}</span>
+    </div>
+@endif
+
 <h1>Seção Produto</h1>
 <hr />
 <div class="row">
@@ -15,7 +25,7 @@
         </div>
         <div class="card-body">
             <a class="btn btn-primary" href="/product/create">Novo Produto</a>
-            <a class="btn btn-primary" href="#">Novo Tamanho</a>
+            <button class="btn btn-primary" href="#" data-toggle="modal" data-target="#tamanho">Novo Tamanho</button>
             <a class="btn btn-primary" href="#">Nova Referência</a>
             <a class="btn btn-primary" href="#">Novo Tipo</a>
             <a class="btn btn-primary" href="#">Nova Cor</a>
@@ -75,4 +85,8 @@
     </div>
 
   </div>
+
+{{--  Modals to create new color, size, reference  --}}
+@include('product.modals.prod_modals')
+
 @endsection
