@@ -51,21 +51,28 @@ class ProdutoController extends Controller
     {
 
         $data = request()->validate([
-            'referencia' => 'required|min:3',
-            'marca' => 'required|min:3',
-            'cor' => 'required|min:3',
-            'id_tipo' => 'required',
             'descricao' => 'required|min:3',
-            'idtamanho' => 'required',
-            'quantidade' => 'required',
-            'preco_compra' => 'required',
+            'marca' => 'required|min:3',
             'preco_venda' => 'required',
+            'preco_compra' => 'required',
+            'id_estoques' => 'required',
+            'referencia' => 'required|min:3',
+            'idtamanho' => 'required',
             'id_fornecedor' => 'required',
-            'id_estoques' => 'required'
+            'id_tipo' => 'required',
+            'cor' => 'required|min:3'
         ]);
-
-        dd($data);
-
+        $quantidade = request()->validate([
+            'quantidade' => 'required',
+        ]);
+        // dd($data['idtamanho'], $data['quantidade']);
+        //verify quantity and sizes
+        foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
+            if ($n != 0){
+                echo "id tamanho: ".$idtamanho." - Quantidade: ".$n."<br />";
+                $product = Produto::create($data);
+            }
+        }
         // return redirect('product');
     }
 

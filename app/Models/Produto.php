@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Produto extends Model
 {
     protected $table = 'produto';
+    protected $guarded = [];
+    //My tables does not have this fields
+    public $timestamps = false;
 }

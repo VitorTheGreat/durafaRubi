@@ -14,20 +14,31 @@
     </div>
 @endif
 
+@if (
+        $errors->first('referencia') ||
+        $errors->first('marca') ||
+        $errors->first('cor') ||
+        $errors->first('id_tipo') ||
+        $errors->first('descricao') ||
+        $errors->first('preco_compra') ||
+        $errors->first('preco_venda') ||
+        $errors->first('id_fornecedor') ||
+        $errors->first('id_estoques') ||
+        $errors->first('idtamanho') ||
+        $errors->first('quantidade')
+    )
+    <div class="alert alert-danger">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="tim-icons icon-simple-remove"></i>
+        </button>
+        <span>
+        {{-- <b> Error - </b> {{$errors->first('referencia')}}</span> --}}
+        <b> Error - </b> Ei, alguma coisa esta faltando</span>
+    </div>
+@endif
+
 <h1>Novo Produto</h1>
 <hr />
-
-{{ $errors->first('referencia') }}
-{{ $errors->first('marca') }}
-{{ $errors->first('cor') }}
-{{ $errors->first('id_tipo') }}
-{{ $errors->first('descricao') }}
-{{ $errors->first('preco_compra') }}
-{{ $errors->first('preco_venda') }}
-{{ $errors->first('id_fornecedor') }}
-{{ $errors->first('id_estoques') }}
-{{ $errors->first('idtamanho') }}
-{{ $errors->first('quantidade') }}
 
 <div class="row">
     <!-- / COMEÇA CADASTRO PRODUTO -->
@@ -117,9 +128,9 @@
                         <div class="input-group input-group-sm mb-3">
                             @foreach ($sizes as $size)
                                 <div class="input-group-prepend mb-2 col-2">
-                                    <input name="idtamanho[]" id="id_tamanho" value="{{$size->idtamanho}}" hidden>
+                                    <input name="idtamanho[]" id="idtamanho[]" value="{{$size->idtamanho}}" hidden>
                                     <span class="input-group-text" id="inputGroup-sizing-sm">{{$size->tamanho}}</span>
-                                    <input type="number" name="quantidade[]" id="quantidade_tamanho" value="0" class="form-control form-control-sm" aria-label="Small" placeholder="QTD" aria-describedby="inputGroup-sizing-sm">
+                                    <input type="number" name="quantidade[]" id="quantidade[]" value="0" class="form-control form-control-sm" aria-label="Small" placeholder="QTD" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                             @endforeach
                         </div>
