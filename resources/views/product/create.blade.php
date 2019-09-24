@@ -14,26 +14,16 @@
     </div>
 @endif
 
-@if (
-        $errors->first('referencia') ||
-        $errors->first('marca') ||
-        $errors->first('cor') ||
-        $errors->first('id_tipo') ||
-        $errors->first('descricao') ||
-        $errors->first('preco_compra') ||
-        $errors->first('preco_venda') ||
-        $errors->first('id_fornecedor') ||
-        $errors->first('id_estoques') ||
-        $errors->first('idtamanho') ||
-        $errors->first('quantidade')
-    )
+@if ($errors->any())
     <div class="alert alert-danger">
         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
         <i class="tim-icons icon-simple-remove"></i>
         </button>
         <span>
         {{-- <b> Error - </b> {{$errors->first('referencia')}}</span> --}}
-        <b> Error - </b> Ei, alguma coisa esta faltando</span>
+        @foreach ($errors->all() as $error)
+            <b> Error - </b> {{$error}} </span> <br />
+        @endforeach
     </div>
 @endif
 
