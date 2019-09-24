@@ -1,0 +1,123 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Produto;
+use App\Models\Fornecedor;
+use App\Models\Cor;
+use App\Models\Estoque;
+use App\Models\Referencia;
+use App\Models\Tamanho;
+use App\Models\Tipo;
+use Illuminate\Http\Request;
+
+class ProdutoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('product.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $providers = Fornecedor::all();
+        $colors = Cor::all();
+        $references = Referencia::all();
+        $types = Tipo::all();
+        $sizes = Tamanho::all();
+        $storages = Estoque::all();
+        $product = new Produto();
+
+        return view('product.create', compact('product', 'providers', 'colors', 'references', 'types', 'sizes', 'storages'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        $data = request()->validate([
+            'descricao' => 'required|min:3',
+            'marca' => 'required|min:3',
+            'preco_venda' => 'required',
+            'preco_compra' => 'required',
+            'id_estoques' => 'required',
+            'referencia' => 'required|min:3',
+            'idtamanho' => 'required',
+            'id_fornecedor' => 'required',
+            'id_tipo' => 'required',
+            'cor' => 'required|min:3'
+        ]);
+        $quantidade = request()->validate([
+            'quantidade' => 'required',
+        ]);
+        // dd($data['idtamanho'], $data['quantidade']);
+        //verify quantity and sizes
+        foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
+            if ($n != 0){
+                echo "id tamanho: ".$idtamanho." - Quantidade: ".$n."<br />";
+                $product = Produto::create($data);
+            }
+        }
+        // return redirect('product');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Produto  $Produto
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Produto $produto)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Produto  $Produto
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Produto $produto)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Produto $produto)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Produto $produto)
+    {
+        //
+    }
+}
