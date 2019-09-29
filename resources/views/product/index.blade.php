@@ -41,42 +41,58 @@
     <div class="col-md-12">
       <div class="card ">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+            <p>Legenda Botões:
+                <small class="text-success"><i class="tim-icons icon-paper"></i> - Imprimir Etiquetas</small>
+                <small class="text-warning"><i class="tim-icons icon-pencil"></i> - Editar Produto</small>
+                <small class="text-danger"><i class="tim-icons icon-simple-remove"></i> - Excluir Produto</small>
+            </p>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table tablesorter " id="">
               <thead class=" text-primary">
                 <tr>
-                  <th>
-                    Name
-                  </th>
-                  <th>
-                    Country
-                  </th>
-                  <th>
-                    City
-                  </th>
-                  <th class="text-center">
-                    Salary
-                  </th>
+                  {{-- <th>ID</th> --}}
+                  <th>REF</th>
+                  <th>Estoque</th>
+                  <th>Quantidade</th>
+                  <th>Tamanho</th>
+                  <th>Marca</th>
+                  <th>Preço</th>
+                  <th>Tipo</th>
+                  <th>Cor</th>
+                  <th>Descricao</th>
+                  <th> # </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-center">
-                    $36,738
-                  </td>
-                </tr>
+                @foreach ($produtos as $produto)
+                <form action="" method="post">
+                    <tr>
+                        <td>{{$produto->idproduto}}</td>
+                        <td>{{$produto->referencia}}</td>
+                        <td>{{$produto->nome_estoques}}</td>
+                        <td>{{$produto->quantidade}}</td>
+                        <td>{{$produto->tamanho}}</td>
+                        <td>{{$produto->marca}}</td>
+                        <td>{{$produto->preco}}</td>
+                        <td>{{$produto->tipo_full}}</td>
+                        <td>{{$produto->cor}}</td>
+                        <td>{{$produto->descricao}}</td>
+                        <td>
+                            <button class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
+                                <i class="tim-icons icon-paper"></i>
+                            </button>
+                            <button class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
+                                <i class="tim-icons icon-pencil"></i>
+                            </button>
+                            <button class="btn btn-danger btn-fab btn-icon"  name="btn_delete_produto">
+                                <i class="tim-icons icon-simple-remove"></i>
+                            </button>
+                        </td>
+                        </tr>
+                </form>
+                @endforeach
               </tbody>
             </table>
           </div>

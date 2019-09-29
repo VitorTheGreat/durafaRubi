@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ControleEstoque;
 use App\Models\Produto;
 use App\Models\Fornecedor;
 use App\Models\Cor;
 use App\Models\Estoque;
 use App\Models\Referencia;
+use App\Models\SQLViews\ViewProdutos;
 use App\Models\Tamanho;
 use App\Models\Tipo;
 use Illuminate\Http\Request;
@@ -21,7 +23,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        $produtos = ViewProdutos::all();
+
+        return view('product.index', compact('produtos'));
     }
 
     /**
@@ -50,7 +54,6 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = request()->validate([
             'descricao' => 'required|min:3',
             'marca' => 'required|min:3',
@@ -67,43 +70,40 @@ class ProdutoController extends Controller
             'quantidade' => 'required',
         ]);
 
-        // dd($data['idtamanho'], $data['quantidade']);
-        //verify quantity and sizes
-        foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
-            if ($n != 0){
-                echo "id tamanho: ".$idtamanho." - Quantidade: ".$n."<br />";
+        try {
+            //verify quantity and sizes
+            foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
+                if ($n != 0){
 
-                $idreferencia = DB::select('SELECT idreferencia FROM referencia WHERE referencia = :referencia', ['referencia' => $data["referencia"]]);
-                $idcor = DB::select('SELECT idcor FROM cor WHERE nome = :cor', ['cor' => $data["cor"]]);
-                // var_dump($idreferencia[0]->idreferencia);
-                // var_dump($idcor[0]->idcor);
-                // echo 'id Ref: ' . $idreferencia[0]->idreferencia . '<br />';
-                // echo 'id Cor: ' . $idcor[0]->idcor;
+                    $idreferencia = DB::select('SELECT idreferencia FROM referencia WHERE referencia = :referencia', ['referencia' => $data["referencia"]]);
+                    $idcor = DB::select('SELECT idcor FROM cor WHERE nome = :cor', ['cor' => $data["cor"]]);
 
-                $produto = Produto::create([
-                    'descricao' => request('descricao'),
-                    'marca' => request('marca'),
-                    'preco_venda' => request('preco_venda'),
-                    'preco_compra' => request('preco_compra'),
-                    'id_estoques' => request('id_estoques'),
-                    'referencia' => $idreferencia[0]->idreferencia,
-                    'idtamanho' => $idtamanho,
-                    'id_fornecedor' => request('id_fornecedor'),
-                    'id_tipo' => request('id_tipo'),
-                    'cor' => $$idcor[0]->idcor,
-                ]);
+                    $produto = Produto::create([
+                        'descricao' => request('descricao'),
+                        'marca' => request('marca'),
+                        'preco_venda' => request('preco_venda'),
+                        'preco_compra' => request('preco_compra'),
+                        'id_estoques_produto' => request('id_estoques'),
+                        'id_referencia_produto' => $idreferencia[0]->idreferencia,
+                        'id_tamanho_produto' => $idtamanho,
+                        'id_fornecedor_produto' => request('id_fornecedor'),
+                        'id_tipo_produto' => request('id_tipo'),
+                        'id_cor_produto' => $idcor[0]->idcor,
+                    ]);
 
-                var_dump($produto);
-                // $idproduto = Product::where('idproduto', $produto);
-                // dd($idproduto);
-                // echo $idproduto;
-                // foreach ($idproduto as $idpro) {
-                    // echo "id tamanho: ".$idtamanho." - Quantidade: ".$n."<br />";
-                    // echo "Id produto: ".$idpro['idproduto']."<br />";
-                // }
+                    $qtd = ControleEstoque::create([
+                        'quantidade' => $n,
+                        'id_produto_controle' => $produto['id']
+                    ]);
+                }
             }
+            return back()->with('cad_produto', 'Produtos Cadastrados com Successo BRO!');
+
+        }catch(\Exception $e){
+            return [
+             'msg_error' => $e->getMessage()
+            ];
         }
-        // return redirect('product');
     }
 
     /**

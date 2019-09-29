@@ -4,13 +4,13 @@
 
 @section('layouts.black.content')
 
-@if (session('status'))
+@if (session('status') || session('cad_produto'))
     <div class="alert alert-success">
         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
         <i class="tim-icons icon-simple-remove"></i>
         </button>
         <span>
-        <b> Success - </b> {{session('status')}}</span>
+        <b> Sucesso - </b> {{session('status')}} {{session('cad_produto')}}</span>
     </div>
 @endif
 
