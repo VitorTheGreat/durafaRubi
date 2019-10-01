@@ -14,6 +14,18 @@
     </div>
 @endif
 
+{{-- start - Error storing product  --}}
+@if (session('err'))
+    <div class="alert alert-danger">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="tim-icons icon-simple-remove"></i>
+        </button>
+        <span>
+        <b> Sucesso - </b> {{session('err')}}</span>
+    </div>
+@endif
+{{-- end - Error storing product  --}}
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">

@@ -62,14 +62,14 @@
                   <th>Tipo</th>
                   <th>Cor</th>
                   <th>Descricao</th>
-                  <th> # </th>
+                  <th> Opções </th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($produtos as $produto)
                 <form action="" method="post">
                     <tr>
-                        <td>{{$produto->idproduto}}</td>
+                        {{--  <td>{{$produto->idproduto}}</td>  --}}
                         <td>{{$produto->referencia}}</td>
                         <td>{{$produto->nome_estoques}}</td>
                         <td>{{$produto->quantidade}}</td>
