@@ -75,58 +75,47 @@ class ProdutoController extends Controller
 
         if(!$idreferencia) {
             $idreferencia = DB::insert('INSERT INTO referencia (referencia) VALUES (:referencia)', ['referencia' => $data["referencia"]]);
+            $idreferencia = DB::select('SELECT idreferencia FROM referencia WHERE referencia = :referencia', ['referencia' => $data["referencia"]]);
+            // echo "!if referencia";
+            // var_dump($idreferencia);
         }
         if(!$idcor) {
-            $idcor = DB::insert('INSERT INTO users cor VALUES (:cor)', ['cor' => $data["cor"]]);
+            $idcor = DB::insert('INSERT INTO cor (nome) VALUES (:cor)', ['cor' => $data["cor"]]);
+            $idcor = DB::select('SELECT idcor FROM cor WHERE nome = :cor', ['cor' => $data["cor"]]);
+            // echo "!if cor";
+            // var_dump($idcor);
         }
 
-        switch ($idreferencia) {
-            case '':
-            $idreferencia = DB::insert('INSERT INTO referencia (referencia) VALUES (:referencia)', ['referencia' => $data["referencia"]]);
-                break;
-            default:
-            $idreferencia = DB::select('SELECT idreferencia FROM referencia WHERE referencia = :referencia', ['referencia' => $data["referencia"]]);
-                break;
+        try {
+            //verify quantity and sizes
+            foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
+                if ($n != 0){
+
+                    $produto = Produto::create([
+                        'descricao' => request('descricao'),
+                        'marca' => request('marca'),
+                        'preco_venda' => request('preco_venda'),
+                        'preco_compra' => request('preco_compra'),
+                        'id_estoques_produto' => request('id_estoques'),
+                        'id_referencia_produto' => $idreferencia[0]->idreferencia,
+                        'id_tamanho_produto' => $idtamanho,
+                        'id_fornecedor_produto' => request('id_fornecedor'),
+                        'id_tipo_produto' => request('id_tipo'),
+                        'id_cor_produto' => $idcor[0]->idcor,
+                    ]);
+
+                    $qtd = ControleEstoque::create([
+                        'quantidade' => $n,
+                        'id_produto_controle' => $produto['id']
+                    ]);
+                }
+            }
+            return back()->with('cad_produto', 'Produtos Cadastrados com Successo Bro!');
+
+        }catch(\Exception $e){
+            return ['msg_error' => $e->getMessage()];
+            // return back()->with('err', 'Erro ao cadastrar produto, tente novamente. Se o erro persistir, chame o Vitor.');
         }
-        switch ($idcor) {
-            case '':
-                $idcor = DB::insert('INSERT INTO cor (cor) VALUES (:cor)', ['cor' => $data["cor"]]);
-                break;
-            default:
-                $idcor = DB::select('SELECT idcor FROM cor WHERE nome = :cor', ['cor' => $data["cor"]]);
-                break;
-        }
-
-        // try {
-        //     //verify quantity and sizes
-        //     foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
-        //         if ($n != 0){
-
-        //             $produto = Produto::create([
-        //                 'descricao' => request('descricao'),
-        //                 'marca' => request('marca'),
-        //                 'preco_venda' => request('preco_venda'),
-        //                 'preco_compra' => request('preco_compra'),
-        //                 'id_estoques_produto' => request('id_estoques'),
-        //                 'id_referencia_produto' => $idreferencia[0]->idreferencia,
-        //                 'id_tamanho_produto' => $idtamanho,
-        //                 'id_fornecedor_produto' => request('id_fornecedor'),
-        //                 'id_tipo_produto' => request('id_tipo'),
-        //                 'id_cor_produto' => $idcor[0]->idcor,
-        //             ]);
-
-        //             $qtd = ControleEstoque::create([
-        //                 'quantidade' => $n,
-        //                 'id_produto_controle' => $produto['id']
-        //             ]);
-        //         }
-        //     }
-        //     return back()->with('cad_produto', 'Produtos Cadastrados com Successo BRO!');
-
-        // }catch(\Exception $e){
-        //     return ['msg_error' => $e->getMessage()];
-        //     // return back()->with('err', 'Erro ao cadastrar produto, tente novamente. Se o erro persistir, chame o Vitor.');
-        // }
     }
 
     /**
