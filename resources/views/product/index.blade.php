@@ -26,9 +26,9 @@
         <div class="card-body">
             <a class="btn btn-primary" href="/product/create">Novo Produto</a>
             <button class="btn btn-primary" href="#" data-toggle="modal" data-target="#tamanho">Novo Tamanho</button>
-            <a class="btn btn-primary" href="#">Nova Referência</a>
-            <a class="btn btn-primary" href="#">Novo Tipo</a>
-            <a class="btn btn-primary" href="#">Nova Cor</a>
+            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#referencia">Nova Referência</a>
+            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#tipo">Novo Tipo</a>
+            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#cor">Nova Cor</a>
             <a class="btn btn-primary" href="#">Estoque Completo</a>
         </div>
       </div>
@@ -80,15 +80,15 @@
                         <td>{{$produto->cor}}</td>
                         <td>{{$produto->descricao}}</td>
                         <td>
-                            <button class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
+                                <a href="product/{$produto->idproduto}/qrcode" class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
                                 <i class="tim-icons icon-paper"></i>
-                            </button>
-                            <button class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
+                            </a>
+                            <a class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
                                 <i class="tim-icons icon-pencil"></i>
-                            </button>
-                            <button class="btn btn-danger btn-fab btn-icon"  name="btn_delete_produto">
+                            </a>
+                            <a class="btn btn-danger btn-fab btn-icon"  name="btn_delete_produto">
                                 <i class="tim-icons icon-simple-remove"></i>
-                            </button>
+                            </a>
                         </td>
                         </tr>
                 </form>

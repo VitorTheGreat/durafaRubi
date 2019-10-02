@@ -62,6 +62,35 @@
         </div>
       </div>
 
+      <!-- Modal referencia-->
+      <div class="modal modal-black fade" id="referencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Criar Nova referencia</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="/reference">
+                @csrf
+                  <div class="input-group mb-3">
+                      <input type="text" name="referencia" id="referencia" class="form-control" placeholder="Nova Referencia" >
+                      <button type="submit" class="btn btn-primary btn-fab btn-icon" name="btn_cadastra_referencia">
+                            <i class="tim-icons icon-simple-add"></i>
+                        </button>
+                  </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Modal cor-->
       <div class="modal modal-black fade" id="cor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">

@@ -162,4 +162,11 @@ class ProdutoController extends Controller
     {
         //
     }
+
+    // Products QrCode page
+    public function qrCode()
+    {
+        return view('product.qrcode');
+    }
+
 }

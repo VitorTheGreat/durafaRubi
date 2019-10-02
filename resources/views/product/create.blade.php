@@ -65,7 +65,7 @@
                 </datalist>
               </div>
 
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <label for="exampleInputName">Marca</label>
                   <input value="{{ old('marca') ?? $product->marca}}" name="marca" type="text" placeholder="Marca" class="form-control input-md" >
               </div>
@@ -80,13 +80,6 @@
                     @endforeach
                 </datalist>
               </div>
-
-                <div class="button-down col-md-1">
-                  <!-- Button trigger modal cor-->
-                  <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#cor">
-                    Novo
-                  </button>
-                </div>
 
 
           </div>
