@@ -36,5 +36,5 @@ Route::resource('storage', 'EstoqueController')->middleware('auth');
 Route::post('size', 'TamanhoController@store');
 
 //QRCode routes
-Route::get('product/{product}/qrcode', 'ProdutoController@qrCode')->middleware('auth');
+Route::get('product/{produto}/qrcode', 'ProdutoController@qrCode')->middleware('auth');
 

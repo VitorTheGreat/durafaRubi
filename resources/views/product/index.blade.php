@@ -67,7 +67,6 @@
               </thead>
               <tbody>
                 @foreach ($produtos as $produto)
-                <form action="" method="post">
                     <tr>
                         {{--  <td>{{$produto->idproduto}}</td>  --}}
                         <td>{{$produto->referencia}}</td>
@@ -80,7 +79,7 @@
                         <td>{{$produto->cor}}</td>
                         <td>{{$produto->descricao}}</td>
                         <td>
-                                <a href="product/{$produto->idproduto}/qrcode" class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
+                            <a href="product/{{$produto->idproduto}}/qrcode" class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
                                 <i class="tim-icons icon-paper"></i>
                             </a>
                             <a class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
@@ -91,7 +90,6 @@
                             </a>
                         </td>
                         </tr>
-                </form>
                 @endforeach
               </tbody>
             </table>

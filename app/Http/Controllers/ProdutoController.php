@@ -164,9 +164,12 @@ class ProdutoController extends Controller
     }
 
     // Products QrCode page
-    public function qrCode()
+    public function qrCode($produto)
     {
-        return view('product.qrcode');
+        // passar id para view produto aqui!
+        $view_prouduto = ViewProdutos::all();
+
+        return view('product.qrcode', compact('produto'));
     }
 
 }
