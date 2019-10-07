@@ -73,13 +73,13 @@ class ProdutoController extends Controller
         $idreferencia = DB::select('SELECT idreferencia FROM referencia WHERE referencia = :referencia', ['referencia' => $data["referencia"]]);
         $idcor = DB::select('SELECT idcor FROM cor WHERE nome = :cor', ['cor' => $data["cor"]]);
 
-        if(!$idreferencia) {
+        if (!$idreferencia) {
             $idreferencia = DB::insert('INSERT INTO referencia (referencia) VALUES (:referencia)', ['referencia' => $data["referencia"]]);
             $idreferencia = DB::select('SELECT idreferencia FROM referencia WHERE referencia = :referencia', ['referencia' => $data["referencia"]]);
             // echo "!if referencia";
             // var_dump($idreferencia);
         }
-        if(!$idcor) {
+        if (!$idcor) {
             $idcor = DB::insert('INSERT INTO cor (nome) VALUES (:cor)', ['cor' => $data["cor"]]);
             $idcor = DB::select('SELECT idcor FROM cor WHERE nome = :cor', ['cor' => $data["cor"]]);
             // echo "!if cor";
@@ -88,8 +88,8 @@ class ProdutoController extends Controller
 
         try {
             //verify quantity and sizes
-            foreach(array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n ){
-                if ($n != 0){
+            foreach (array_combine($data['idtamanho'], $quantidade['quantidade']) as $idtamanho => $n) {
+                if ($n != 0) {
 
                     $produto = Produto::create([
                         'descricao' => request('descricao'),
@@ -111,8 +111,7 @@ class ProdutoController extends Controller
                 }
             }
             return back()->with('cad_produto', 'Produtos Cadastrados com Successo Bro!');
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return ['msg_error' => $e->getMessage()];
             // return back()->with('err', 'Erro ao cadastrar produto, tente novamente. Se o erro persistir, chame o Vitor.');
         }
@@ -158,9 +157,21 @@ class ProdutoController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produto $produto)
+    public function destroy($produto)
     {
-        //
+        // dd($produto);
+
+        try {
+            $estoque = DB::delete('DELETE FROM controle_estoque WHERE id_produto_controle = :id_produto_controle;', ['id_produto_controle' => $produto]);
+
+            $produto = DB::delete('DELETE FROM produto WHERE idproduto = :idproduto', ['idproduto' => $produto]);
+
+            return back()->with('success', 'Produto Deletado com sucesso!');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Não foi possivel deletar esse produto. Tente novamente, se o erro persistir chame o Vitor');
+            // return back()->with('error', 'Não foi possivel deletar esse produto'. $e);
+        }
     }
 
     // Products QrCode page
@@ -171,5 +182,4 @@ class ProdutoController extends Controller
 
         return view('product.qrcode', ['produto' => $produto[0]]);
     }
-
 }

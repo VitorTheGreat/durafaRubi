@@ -10,14 +10,14 @@ select option {
     width: 78.5mm;
     height: 57.6mm;
     margin: 3px 3px 5px 7px;
-    visibility: visible;
+    visibility: hidden;
     padding: 4px;
 }
 
 .etiqueta-correction {
     margin-left: 20px;
     margin-bottom: 5px;
-    color: #fff;
+    /* color: #fff; */
 }
 
 .font_etiqueta_tamanho {
@@ -27,6 +27,7 @@ select option {
 .font_etiqueta {
     text-transform: uppercase;
     font-size: 13px;
+    color: #212529;
 }
 
 .numero_barcode {

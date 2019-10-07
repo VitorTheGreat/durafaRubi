@@ -12,3 +12,4 @@
   <script src="{{asset('black/js/plugins/bootstrap-notify.js')}}"></script>
   <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('black/js/black-dashboard.min.js?v=1.0.0')}}"></script>
+  <script src="{{asset('js/global.js')}}"></script>

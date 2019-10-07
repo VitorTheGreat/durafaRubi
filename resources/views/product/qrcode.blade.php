@@ -4,22 +4,25 @@
 
 @section('layouts.black.content')
 <h1>Imprimir Etiqueta</h1>
-<p>Produto: {{$produto->idproduto}}</p>
+<p>Escolha quais etiquetas Imprimir</p>
 
 <div class="noprint">
-    <h2>Escolha quais etiquetas Imprimir</h2>
     @for ($i = 1; $i < 18; $i++)
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="check{{$i}}">
-            <label class="form-check-label" for="inlineCheckbox1">{{$i}}</label>
-        </div>
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox{{$i}}" name="check{{$i}}">
+              <span class="form-check-sign">
+                <span class="check"><label for="inlineCheckbox{{$i}}">{{$i}}</label></span>
+              </span>
+            </label>
+          </div>
     @endfor
 </div>
-
-<div class="row">
+<hr>
+<div class="row bg-white">
 @for ($i = 1; $i < 18; $i++)
     <div class="etiqueta-correction">
-        <div class="etiqueta" name="">
+        <div class="etiqueta" name="{{$i}}">
           <table>
             <tbody>
               <tr>

@@ -4,13 +4,23 @@
 
 @section('layouts.black.content')
 
-@if (session('status'))
+@if (session('success'))
     <div class="alert alert-success">
         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
         <i class="tim-icons icon-simple-remove"></i>
         </button>
         <span>
-        <b> Success - </b> {{session('status')}}</span>
+        <b> Success - </b> {{session('success')}}</span>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="tim-icons icon-simple-remove"></i>
+        </button>
+        <span>
+        <b> Success - </b> {{session('error')}}</span>
     </div>
 @endif
 
@@ -79,15 +89,21 @@
                         <td>{{$produto->cor}}</td>
                         <td>{{$produto->descricao}}</td>
                         <td>
-                            <a href="product/{{$produto->idproduto}}/qrcode" class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
-                                <i class="tim-icons icon-paper"></i>
-                            </a>
-                            <a class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
-                                <i class="tim-icons icon-pencil"></i>
-                            </a>
-                            <a class="btn btn-danger btn-fab btn-icon"  name="btn_delete_produto">
-                                <i class="tim-icons icon-simple-remove"></i>
-                            </a>
+                            <div class="d-flex justify">
+                                <a href="product/{{$produto->idproduto}}/qrcode" class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
+                                    <i class="tim-icons icon-paper"></i>
+                                </a>
+                                <a href="#" class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
+                                    <i class="tim-icons icon-pencil"></i>
+                                </a>
+                                <form action="product/{{$produto->idproduto}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-fab btn-icon"  name="btn_delete_produto">
+                                        <i class="tim-icons icon-simple-remove"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                         </tr>
                 @endforeach

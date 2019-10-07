@@ -41,7 +41,7 @@ class TamanhoController extends Controller
         // dd($data);
         $size = Tamanho::create($data);
 
-        return back()->with('status', 'Tamanho Criado!');
+        return back()->with('success', 'Tamanho Criado!');
     }
 
     /**
