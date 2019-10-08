@@ -134,9 +134,27 @@ class ProdutoController extends Controller
      * @param  \App\Models\Produto  $Produto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produto $produto)
+    public function edit($id)
     {
-        //
+        $providers = Fornecedor::all();
+        $colors = Cor::all();
+        $references = Referencia::all();
+        $types = Tipo::all();
+        $sizes = Tamanho::all();
+        $storages = Estoque::all();
+        $produto = DB::select('select * from view_produtos where idproduto = :idproduto', ['idproduto' => $id]);
+        dd($produto);
+
+        // return view('product.edit',
+        //     [
+        //         'produto' => $produto[0],
+        //         'providers' => $providers,
+        //         'colors' => $colors,
+        //         'references' => $references,
+        //         'types' => $types,
+        //         'sizes' => $sizes,
+        //         'storages' => $storages
+        //     ]);
     }
 
     /**

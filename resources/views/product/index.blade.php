@@ -93,7 +93,7 @@
                                 <a href="product/{{$produto->idproduto}}/qrcode" class="btn btn-success btn-fab btn-icon"  name="btn_etiqueta_produto">
                                     <i class="tim-icons icon-paper"></i>
                                 </a>
-                                <a href="#" class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
+                                <a href="product/{{$produto->idproduto}}/edit" class="btn btn-warning btn-fab btn-icon"  name="btn_editar_produto">
                                     <i class="tim-icons icon-pencil"></i>
                                 </a>
                                 <form action="product/{{$produto->idproduto}}" method="post">
