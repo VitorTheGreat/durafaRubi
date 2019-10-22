@@ -143,7 +143,7 @@ class ProdutoController extends Controller
         $sizes = Tamanho::all();
         $storages = Estoque::all();
         $produto = DB::select('select * from view_produtos where idproduto = :idproduto', ['idproduto' => $id]);
-        dd($produto);
+        // dd($produto);
 
         // return view('product.edit',
         //     [

@@ -23,7 +23,7 @@ Route::post('product', 'ProdutoController@store');
 // Show method by customer ID
 Route::get('product/{product}', 'ProdutoController@show');
 // Restful method of updating
-Route::get('product/{product}/edit', 'ProdutoController@edit'); //view for editing
+Route::get('product/{product}/edit', 'ProdutoController@edit')->middleware('auth'); //view for editing
 Route::patch('product/{product}', 'ProdutoController@update'); //saving data comming from view edit
 Route::delete('product/{product}', 'ProdutoController@destroy'); //deleting data comming from view
 //QRCode routes
